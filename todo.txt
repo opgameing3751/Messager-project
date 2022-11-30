@@ -1,0 +1,10 @@
+for chat_sending() wait for pygame to give it a msg
+ex - 
+msg = input 
+chat_sending(msg)
+
+
+ make codes in msg box with !
+
+ ex
+ !font "Font type"
