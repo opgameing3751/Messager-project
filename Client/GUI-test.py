@@ -25,6 +25,8 @@ def GUI():
     msg = []
     s = ''
     s2 = ''
+    settingsicon_ = pygame.image.load("imgs\settings.png")
+    settingsicon = pygame.transform.scale(settingsicon_, (24,24))
     msgcount = int(os.getenv("msgnum"))
     timpcount =1
     for i in range(msgcount):
@@ -263,7 +265,7 @@ def GUI():
             
             userinput = font.render((user),True,(255,255,255))
             passinput = font.render((pas),True,(255,255,255))
-            
+           
             pygame.draw.rect((wn, loginButton_color), (490,486, 80,50 ))
             wn.blit(loginbutton, (500,500))
             loginbox = pygame.Rect(471,486, 490,520)
@@ -313,7 +315,8 @@ def GUI():
                         logg = True
 
             font = pygame.font.Font(None,25)
-            
+            pygame.draw.rect(wn, (255,255,255),(300,200,24,24))
+            wn.blit(settingsicon,(395,300))
             wn.blit(userinput, (405,315))
             wn.blit(passinput, (405,365))
 
