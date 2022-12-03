@@ -8,3 +8,5 @@ chat_sending(msg)
 
  ex
  !font "Font type"
+
+ https://stackoverflow.com/questions/21356439/how-to-load-and-play-a-video-in-pygame

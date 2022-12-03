@@ -19,31 +19,31 @@ def on_new_client(c,addr,c2,addr2):
             if Clientrev == "register":
                 c.send('awaiting'.encode('utf-8'))
                 username = c.recv(1024).decode('utf-8')
-                #print(username)
+                print(username)
                 c.send(username.encode('utf-8'))
                 password = c.recv(1024).decode('utf-8')
-                #print(password)
+                print(password)
                 c.send(password.encode('utf-8'))
                 os.environ[f'{username}'] = password
                 dotenv.set_key(dotenv_file, f"{username}", os.environ[f"{username}"])
                 #password = os.getenv("username")
-                #print("done")
+                print("done")
                 
             if Clientrev == "loggin":
                 c.send("loggin".encode('utf-8')) 
                 account_password = os.environ[f"{c.recv(1024).decode('utf-8')}"] #gets the username and starts waiting for password
-                #print(account_password)
+                print(account_password)
                 c.send("waiting for password".encode('utf-8'))
                 password = c.recv(1024).decode('utf-8')
                 c.send("password".encode('utf-8'))
-                #print(password)
+                print(password)
                 if account_password == password:
                     c.send("passed".encode("utf-8"))
                     print('passed')
                 else:
                     print('denied')
                     c.send("denied".encode('utf-8'))
-                #print('done')
+                print('done')
                 #while True:
             if Clientrev == "chatmsg":
                 c2.send("waiting for msg".encode("utf-8"))
@@ -56,9 +56,10 @@ def on_new_client(c,addr,c2,addr2):
                 #c.send("1998".encode("utf-8"))
                 #print(c)
                 #time.sleep(1)
-                #print(f"first - {num}")
+                print(f"{User}: {msg}")
+                print(f"first - {num}")
                 for i in range(num):
-                    #print(num)
+                    print(num)
                     c_list[i].send("1998".encode("utf-8"))
                     #print(f"{c_list[i].recv(1024).decode('utf-8')}")
                     time.sleep(.01)
