@@ -246,7 +246,8 @@ def GUI():
                         logg = True
 
             font = pygame.font.Font(None,25)
-            
+            pygame.draw.rect(wn, (255,255,255),(675,210,24,24))
+            wn.blit(settingsicon,(675,210))
             wn.blit(userinput, (405,315))
             wn.blit(passinput, (405,365))
 
@@ -315,8 +316,8 @@ def GUI():
                         logg = True
 
             font = pygame.font.Font(None,25)
-            pygame.draw.rect(wn, (255,255,255),(300,200,24,24))
-            wn.blit(settingsicon,(395,300))
+            pygame.draw.rect(wn, (255,255,255),(675,210,24,24))
+            wn.blit(settingsicon,(695,250))
             wn.blit(userinput, (405,315))
             wn.blit(passinput, (405,365))
 
