@@ -7,7 +7,9 @@ dotenv.load_dotenv(dotenv_file)
 
 def GUI():
     global msgcount
-    Version = "0.1"
+    Version = "0.2"
+    VersionDate = "12/7/2022"
+    program = True
     starting = False
     username = True
     password = False
@@ -25,9 +27,12 @@ def GUI():
     msg = []
     s = ''
     s2 = ''
+    settingsgui = False
     settingsicon_ = pygame.image.load("imgs\settings.png")
     settingsicon = pygame.transform.scale(settingsicon_, (24,24))
     msgcount = int(os.getenv("msgnum"))
+    BackButtonimg_ = pygame.image.load("imgs\BackButton.png")
+    BackButtonimg = pygame.transform.scale(BackButtonimg_, (48,25))
     timpcount =1
     for i in range(msgcount):
         msg.append(os.getenv(f"{timpcount}"))
@@ -42,7 +47,7 @@ def GUI():
     for i in range(rangecount):
         try:
             msg_ = os.getenv("msg")
-            print(msg_)
+            #print(msg_)
             if msg_ != "None":
                 msg.append(msg_)
             else:
@@ -101,7 +106,7 @@ def GUI():
             os.environ[f"{count}"] = msg_
             os.environ["msgnum"] = count
             dotenv.set_key(dotenv_file, f"{count}", os.environ[f"{count}"])
-            print("saved")
+            #print("saved")
             
 
     def chat_rev():
@@ -164,7 +169,7 @@ def GUI():
 
 
 
-    while True:
+    while program:
         pygame.draw.rect(wn, (5,10,50), (0, 0, 1024, 768))
         
         RGBRRR = (random.randint(0,255),random.randint(0,255),random.randint(0,255))
@@ -173,7 +178,7 @@ def GUI():
             
             
         font = pygame.font.Font(None,15)
-        versionblit = font.render((f"12/2/2022 build {Version}"),True, (255,255,255))
+        versionblit = font.render((f"{VersionDate} {Version}"),True, (255,255,255))
         font = pygame.font.Font(None,30)
         if starting:
             pygame.draw.rect(wn, (10,15,55),(342, 200, 372, 382))
@@ -185,13 +190,14 @@ def GUI():
             username_box = pygame.Rect(395, 305, 270, 30)
             Password_box = pygame.Rect(395, 355, 270, 30)
             wn.blit(login_screen, (415,245))
-            
+            BackButton = pygame.Rect(352,210,68,48)
             userinput = font.render((user),True,(255,255,255))
             passinput = font.render((pas),True,(255,255,255))
             pygame.draw.rect(wn, loginButton_color, (490,486, 80,50 ))
             wn.blit(loginbutton, (500,500))
             loginbox = pygame.Rect(490,486, 80,50)
             wn.blit(versionblit, (600,560))
+            settinshitbox = pygame.Rect(675,210,48,24)
             if os.getenv("ip") == "":
                 font = pygame.font.Font(None,20)
                 Warning_ip = font.render(("WARNING NO IP ADRESS. SET AN IP AND RESTART"),True,(255,0,0))
@@ -206,9 +212,10 @@ def GUI():
                     else:
                         loginButton_color = loginButton_color_nohover
                 if event.type == pygame.QUIT:
-                    pygame.quit()
+                    print("quit")
+                    program = False
                     sys.quit()
-                    return
+                    pygame.quit()
                     print('game quit')
                 if event.type == pygame.KEYDOWN:
                     if username:
@@ -244,12 +251,18 @@ def GUI():
                     if loginbox.collidepoint(event.pos):
                         starting = False
                         logg = True
+                    if settinshitbox.collidepoint(event.pos):
+                        settingsgui = True
+                    if settingsgui and BackButton.collidepoint(event.pos):
+                        settingsgui = False
+                        
 
             font = pygame.font.Font(None,25)
-            pygame.draw.rect(wn, (255,255,255),(675,210,24,24))
+            
             wn.blit(settingsicon,(675,210))
             wn.blit(userinput, (405,315))
             wn.blit(passinput, (405,365))
+
 
         if reg:
             tick.tick()
@@ -270,7 +283,7 @@ def GUI():
             pygame.draw.rect((wn, loginButton_color), (490,486, 80,50 ))
             wn.blit(loginbutton, (500,500))
             loginbox = pygame.Rect(471,486, 490,520)
-            
+            BackButton = pygame.Rect(352,210,48,25)
             for event in pygame.event.get():
                 if loginbox.collidepoint(event.pos):
                     loginbutton_color = loginButton_color_hover
@@ -314,6 +327,9 @@ def GUI():
                     if loginbox.collidepoint(event.pos):
                         starting = False
                         logg = True
+                    if settingsgui and BackButton.collidepoint(event.pos):
+                        print("back")
+                        settingsgui = False
 
             font = pygame.font.Font(None,25)
             pygame.draw.rect(wn, (255,255,255),(675,210,24,24))
@@ -321,6 +337,10 @@ def GUI():
             wn.blit(userinput, (405,315))
             wn.blit(passinput, (405,365))
 
+        if settingsgui:
+            pygame.draw.rect(wn, (10,15,55),(342, 200, 372, 382))
+            wn.blit(BackButtonimg, (352,210))
+            
         if logg:
             tick.tick()
             host = os.getenv("ip")

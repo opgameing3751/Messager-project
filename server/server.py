@@ -12,6 +12,15 @@ def megsend(User, msg):
 
 def on_new_client(c,addr,c2,addr2):
     print(addr)
+    quiz = False
+    #Quiz questions
+    QuizQ = ["Server: When was BoyWithUke first song?","Server: What was BoyWithUkes first hit song?","What is BoyWithUkes lastest song?","Has BoyWithUke shown his face?"]
+    #Quiz Amsurs
+    QuizA = ["",""]
+    #Quiz Player Ansurs
+    QuizP = []
+    QuizN = 1
+    msgcom = ""
     while True:
         try:
             Clientrev = 0
@@ -57,14 +66,46 @@ def on_new_client(c,addr,c2,addr2):
                 #print(c)
                 #time.sleep(1)
                 #print(f"first - {num}")
-                for i in range(num):
-                    #print(num)
-                    c_list[i].send("1998".encode("utf-8"))
-                    #print(f"{c_list[i].recv(1024).decode('utf-8')}")
-                    time.sleep(.01)
-                    c_list[i].send(f"{User}: {msg}".encode("utf-8"))
-                    #print(f"{c_list[i].recv(1024).decode('utf-8')}")
-                    time.sleep(.01)
+                '''if msg == "!Quiz":
+                    quiz = True
+                    for i in range(num):
+                        #print(num)
+                        c_list[i].send("1998".encode("utf-8"))
+                        #print(f"{c_list[i].recv(1024).decode('utf-8')}")
+                        time.sleep(.01)
+                        c_list[i].send(f"{User} - Has started a Quiz".encode("utf-8"))
+                        #print(f"{c_list[i].recv(1024).decode('utf-8')}")
+                        time.sleep(.01)
+                    
+                    for i in range(num):
+                        #print(num)
+                        c_list[i].send("1998".encode("utf-8"))
+                        #print(f"{c_list[i].recv(1024).decode('utf-8')}")
+                        time.sleep(.01)
+                        c_list[i].send(f"{User} - Has started a Quiz".encode("utf-8"))
+                        #print(f"{c_list[i].recv(1024).decode('utf-8')}")
+                        time.sleep(.01)
+                if quiz and msgcom == '!Answer A':
+                    print("h")
+                if quiz and msgcom == '!Answer B':
+                    print("h")
+                if quiz and msgcom == '!Answer C':
+                    print("h")
+                if quiz and msgcom == '!Answer D':
+                    print("h")'''
+                if msg == "!quit":
+                    #for i in range(num):
+
+                    print("hold")
+                else:
+                    for i in range(num):
+                        #print(num)
+                        c_list[i].send("1998".encode("utf-8"))
+                        #print(f"{c_list[i].recv(1024).decode('utf-8')}")
+                        time.sleep(.01)
+                        c_list[i].send(f"{User}: {msg}".encode("utf-8"))
+                        #print(f"{c_list[i].recv(1024).decode('utf-8')}")
+                        time.sleep(.01)
                     
                 #megsend(User, msg)
         except:
@@ -84,16 +125,19 @@ s2.listen(5)
 c_list = []
 c2_list = []
 addr_list = []
+numlist = []
 num = 0
 sending_list =[]
 while True:
     c, addr = s.accept()
     time.sleep(1)
     c2, addr2 = s2.accept()
+    num = num + 1
+    numlist.append(num)
     c_list.append(c)
     c2_list.append(c2)
 
-    num = num + 1
+    
     #print(f"sending - {sending}")
     #print(f"sending list - {sending_list}")
     #print(num)
