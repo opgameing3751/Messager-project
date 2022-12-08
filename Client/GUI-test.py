@@ -16,8 +16,8 @@ def GUI():
     loggedin = False
     splash_screen = True
     logg = False
-    user = "Adam"
-    pas = "Adam123"
+    user = ""
+    pas = ""
     input3 = 'hello'
     rebuild = False
     res = (1024, 768)
@@ -28,10 +28,10 @@ def GUI():
     s = ''
     s2 = ''
     settingsgui = False
-    settingsicon_ = pygame.image.load("imgs\settings.png")
+    settingsicon_ = pygame.image.load("Client\imgs\settings.png")
     settingsicon = pygame.transform.scale(settingsicon_, (24,24))
     msgcount = int(os.getenv("msgnum"))
-    BackButtonimg_ = pygame.image.load("imgs\BackButton.png")
+    BackButtonimg_ = pygame.image.load("Client\imgs\BackButton.png")
     BackButtonimg = pygame.transform.scale(BackButtonimg_, (48,25))
     timpcount =1
     for i in range(msgcount):

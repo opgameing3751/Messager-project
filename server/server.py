@@ -21,6 +21,7 @@ def on_new_client(c,addr,c2,addr2):
     QuizP = []
     QuizN = 1
     msgcom = ""
+    version = (0.4)
     while True:
         try:
             Clientrev = 0
@@ -98,6 +99,7 @@ def on_new_client(c,addr,c2,addr2):
 
                     print("hold")
                 if msg == "!Fact" or msg == "!fact":
+                    fact = randfacts.get_fact()
                     for i in range(num):
                         #print(num)
                         c_list[i].send("1998".encode("utf-8"))
@@ -111,7 +113,16 @@ def on_new_client(c,addr,c2,addr2):
                         c_list[i].send("1998".encode("utf-8"))
                         #print(f"{c_list[i].recv(1024).decode('utf-8')}")
                         time.sleep(.01)
-                        c_list[i].send(f"Fact: {randfacts.get_fact()}".encode("utf-8"))
+                        c_list[i].send(f"Fact: {fact}".encode("utf-8"))
+                        #print(f"{c_list[i].recv(1024).decode('utf-8')}")
+                        time.sleep(.01)
+                if msg == "!ver":
+                    for i in range(num):
+                        #print(num)
+                        c_list[i].send("1998".encode("utf-8"))
+                        #print(f"{c_list[i].recv(1024).decode('utf-8')}")
+                        time.sleep(.01)
+                        c_list[i].send(f"Server: server version is - {version}".encode("utf-8"))
                         #print(f"{c_list[i].recv(1024).decode('utf-8')}")
                         time.sleep(.01)
                 else:
