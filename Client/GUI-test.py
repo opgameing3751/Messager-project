@@ -7,8 +7,8 @@ dotenv.load_dotenv(dotenv_file)
 
 def GUI():
     global msgcount
-    Version = "0.2"
-    VersionDate = "12/7/2022"
+    Version = "0.3"
+    VersionDate = "12/8/2022"
     program = True
     starting = False
     username = True
@@ -132,8 +132,7 @@ def GUI():
                 msg.append(reve)
                 msgcount = msgcount + 1
                 
-                save_ = threading.Thread(target=save)
-                save_.start()
+                
 
                 
                 
@@ -177,8 +176,8 @@ def GUI():
                 
             
             
-        font = pygame.font.Font(None,15)
-        versionblit = font.render((f"{VersionDate} {Version}"),True, (255,255,255))
+        font = pygame.font.Font(None,20)
+        versionblit = font.render((f"Early Access build - {VersionDate} {Version}"),True, (255,255,255))
         font = pygame.font.Font(None,30)
         if starting:
             pygame.draw.rect(wn, (10,15,55),(342, 200, 372, 382))
@@ -196,7 +195,7 @@ def GUI():
             pygame.draw.rect(wn, loginButton_color, (490,486, 80,50 ))
             wn.blit(loginbutton, (500,500))
             loginbox = pygame.Rect(490,486, 80,50)
-            wn.blit(versionblit, (600,560))
+            wn.blit(versionblit, (500,560))
             settinshitbox = pygame.Rect(675,210,48,24)
             if os.getenv("ip") == "":
                 font = pygame.font.Font(None,20)
@@ -214,6 +213,9 @@ def GUI():
                 if event.type == pygame.QUIT:
                     print("quit")
                     program = False
+                    save_ = threading.Thread(target=save)
+                    save_.start()
+                    save_.join()
                     sys.quit()
                     pygame.quit()
                     print('game quit')
@@ -290,6 +292,10 @@ def GUI():
                 else:
                     loginbutton_color = loginButton_color_nohover
                 if event.type == pygame.QUIT:
+                    save_ = threading.Thread(target=save)
+                    save_.start()
+                    save_.join()
+                    sys.quit()
                     pygame.quit()
                     return
                     print('game quit')
@@ -385,6 +391,10 @@ def GUI():
             tick.tick()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
+                    save_ = threading.Thread(target=save)
+                    save_.start()
+                    save_.join()
+                    sys.quit()
                     pygame.quit()
                     s.close()
                     s2.close()
