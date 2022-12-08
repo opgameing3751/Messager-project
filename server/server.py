@@ -1,7 +1,7 @@
 import socket, os, threading, dotenv, time
 from dotenv import load_dotenv, find_dotenv
 from codecs import ignore_errors
-
+import randfacts
 dotenv_file = dotenv.find_dotenv()
 dotenv.load_dotenv(dotenv_file)
 
@@ -97,6 +97,23 @@ def on_new_client(c,addr,c2,addr2):
                     #for i in range(num):
 
                     print("hold")
+                if msg == "!Fact" or msg == "!fact":
+                    for i in range(num):
+                        #print(num)
+                        c_list[i].send("1998".encode("utf-8"))
+                        #print(f"{c_list[i].recv(1024).decode('utf-8')}")
+                        time.sleep(.01)
+                        c_list[i].send(f"Server: {User} has used !Fact".encode("utf-8"))
+                        #print(f"{c_list[i].recv(1024).decode('utf-8')}")
+                        time.sleep(.01)
+                    for i in range(num):
+                        #print(num)
+                        c_list[i].send("1998".encode("utf-8"))
+                        #print(f"{c_list[i].recv(1024).decode('utf-8')}")
+                        time.sleep(.01)
+                        c_list[i].send(f"Fact: {randfacts.get_fact()}".encode("utf-8"))
+                        #print(f"{c_list[i].recv(1024).decode('utf-8')}")
+                        time.sleep(.01)
                 else:
                     for i in range(num):
                         #print(num)
